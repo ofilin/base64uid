@@ -1,0 +1,19 @@
+{
+  "name": "ofilin/base64uid",
+  "description": "Class for generating UID",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Gribanov",
+      "email": "info@peter-gribanov.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "ofilin\\base64uid\\": ""
+    }
+  }
+}
