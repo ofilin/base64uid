@@ -34,13 +34,13 @@ Also you have the opportunity to manage the long identifier and the number of po
 Pretty simple with [Composer](http://packagist.org), run:
 
 ```sh
-composer require gpslab/base64uid
+composer require ofilin/base64uid
 ```
 
 ## Usage
 
 ```php
-use GpsLab\Component\Base64UID\Base64UID;
+use ofilin\base64uid\Base64UID;
 
 $uid = Base64UID::generate(); // iKtwBpOH2E
 ```
@@ -59,74 +59,6 @@ The floating-length identifier will give more unique identifiers.
 $uid = Base64UID::generate(random_int(8, 10));
 ```
 
-You can customize charset.
-
-```php
-$charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/';
-$uid = Base64UID::generate(11, $charset);
-
-$charset = '0123456789abcdef';
-$uid = Base64UID::generate(11, $charset);
-```
-
-## Domain-driven design (DDD)
-
-How to usage in your [domain](https://en.wikipedia.org/wiki/Domain-driven_design).
-
-For example create a `ArticleId` ValueObject:
-
-```php
-class ArticleId
-{
-    private $id;
-
-    public function __construct(string $id)
-    {
-        $this->id = $id;
-    }
-
-    public function id()
-    {
-        return $this->id;
-    }
-}
-```
-
-Repository interface for Article:
-
-```php
-interface ArticleRepository
-{
-    public function nextId();
-
-    // more methods ...
-}
-```
-
-Concrete repository for Article:
-
-```php
-use GpsLab\Component\Base64UID\Base64UID;
-
-class ConcreteArticleRepository implements ArticleRepository
-{
-    public function nextId()
-    {
-        return new ArticleId(Base64UID::generate());
-    }
-
-    // more methods ...
-}
-```
-
-Now we can create a new entity with `ArticleId`:
-
-```php
-$article = new Article(
-    $repository->nextId(),
-    // more article parameters ...
-);
-```
 
 ## License
 
